@@ -43,8 +43,7 @@ public class Movie {
     @Column(name = "age_rating")
     private String ageRating;
 
-    @Column(name = "poster_url")
-    private String posterUrl;
+    // Bỏ trường posterUrl
 
     @Column(name = "movie_status")
     @Enumerated(EnumType.STRING)
@@ -59,7 +58,14 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private Set<MovieActor> movieActors = new HashSet<>();
 
-
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private Set<Image> images = new HashSet<>();
+
+    // Phương thức tiện ích để lấy poster
+    public Image getPoster() {
+        return images.stream()
+                .filter(Image::isPoster)
+                .findFirst()
+                .orElse(null);
+    }
 }

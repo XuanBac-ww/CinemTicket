@@ -25,6 +25,8 @@ public class Image {
     private Blob image;
     private String downloadUrl;
 
+    @Column(name = "is_poster")
+    private boolean isPoster; // Đánh dấu image này có phải là poster hay không
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
